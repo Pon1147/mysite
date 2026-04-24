@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghép Nối Tình Yêu | Happy 19th Birthday ❤️</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500&display=swap');
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Password Screen -->
+        <div id="password-screen" class="screen active">
+            <div class="lock-box">
+                <h1>🔒</h1>
+                <h2>Nhập mật khẩu để mở món quà</h2>
+                <input type="password" id="password-input" placeholder="Mật khẩu là...">
+                <button onclick="checkPassword()">Mở ra ❤️</button>
+                <p class="hint">Gợi ý: ngày chúng mình quen nhau (ddmm)</p>
+            </div>
+        </div>
+
+        <!-- Main Game Screen -->
+        <div id="main-screen" class="screen">
+            <header>
+                <h1>Ghép Nối Tình Yêu</h1>
+                <p>Sinh nhật lần thứ 19 của em - 30/04/2027</p>
+                <div class="music-control">
+                    <button id="music-btn">♪ Nhạc nền</button>
+                </div>
+            </header>
+
+            <div class="levels">
+                <div class="level-card" data-level="1">
+                    <span>Level 1</span>
+                    <h3>Ngày đầu gặp nhau</h3>
+                </div>
+                <div class="level-card" data-level="2">
+                    <span>Level 2</span>
+                    <h3>Kỷ niệm đáng nhớ nhất</h3>
+                </div>
+                <div class="level-card" data-level="3">
+                    <span>Level 3</span>
+                    <h3>Em trong mắt anh</h3>
+                </div>
+                <div class="level-card" data-level="4">
+                    <span>Level 4</span>
+                    <h3>Tương lai của chúng ta</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/puzzle.js"></script>
+</body>
+</html>

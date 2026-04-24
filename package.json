@@ -1,0 +1,20 @@
+{
+  "name": "mysite",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pon1147/mysite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pon1147/mysite/issues"
+  },
+  "homepage": "https://github.com/Pon1147/mysite#readme",
+  "description": ""
+}
