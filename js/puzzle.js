@@ -107,6 +107,7 @@ function computeBoardSize(naturalWidth, naturalHeight) {
 
 function buildBoard() {
     boardEl.innerHTML = "";
+    boardEl.classList.remove("completed");
     boardEl.style.width = `${boardWidth}px`;
     boardEl.style.height = `${boardHeight}px`;
     boardEl.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
@@ -335,6 +336,7 @@ function lockPieceIntoSlot(piece, slot) {
     }
 
     if (lockedCount === pieces.length) {
+        boardEl.classList.add("completed");
         window.completeLevel();
     }
 }

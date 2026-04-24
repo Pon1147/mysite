@@ -265,6 +265,11 @@ header .music-control button:focus-visible {
   animation: shake-slot 0.25s linear;
 }
 
+.puzzle-board.completed .board-slot {
+  border: none;
+  background: transparent;
+}
+
 .puzzle-piece {
   background-repeat: no-repeat;
   background-color: #fff;

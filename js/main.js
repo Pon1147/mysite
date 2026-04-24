@@ -4,6 +4,8 @@ const totalLevels = 5;
 const maxHintsPerLevel = 3;
 const correctPassword = "1903"; // TODO: replace with your real password
 const STORAGE_KEY = "lovePuzzleProgressV1";
+const COMPLETE_HOLD_MS = 5000;
+const ZALO_PHONE = "0903082908";
 
 const levelData = [
     { num: 1, title: "Tin nhan dau tien", difficulty: "De" },
@@ -176,20 +178,20 @@ function completeLevel() {
     completedLevels = Math.max(completedLevels, currentLevel);
     saveProgress();
 
-    if (typeof window.triggerConfetti === "function") {
-        window.triggerConfetti(140);
-    }
-
-    if (completedLevels >= totalLevels) {
-        setTimeout(showFinalDashboard, 600);
-        return;
-    }
-
     setTimeout(() => {
+        if (typeof window.triggerConfetti === "function") {
+            window.triggerConfetti(140);
+        }
+
+        if (completedLevels >= totalLevels) {
+            setTimeout(showFinalDashboard, 600);
+            return;
+        }
+
         alert(`Hoan thanh Level ${currentLevel}!`);
         showScreen("main-screen");
         createLevelCards();
-    }, 450);
+    }, COMPLETE_HOLD_MS);
 }
 
 function showFinalDashboard() {
@@ -232,14 +234,13 @@ function shareGifts(platform) {
         return;
     }
 
-    const text = encodeURIComponent(buildGiftMessage());
-    if (platform === "telegram") {
-        window.open(`https://t.me/share/url?url=&text=${text}`, "_blank", "noopener,noreferrer");
-        return;
-    }
-
     if (platform === "zalo") {
-        window.open(`https://zalo.me/share?text=${text}`, "_blank", "noopener,noreferrer");
+        const text = buildGiftMessage();
+        if (navigator.clipboard?.writeText) {
+            navigator.clipboard.writeText(text).catch(() => {});
+        }
+        window.open(`https://zalo.me/${ZALO_PHONE}`, "_blank", "noopener,noreferrer");
+        alert("Da mo Zalo 0903082908 va copy noi dung mon qua. Ban chi can paste de gui.");
     }
 }
 
