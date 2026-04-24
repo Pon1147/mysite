@@ -1,110 +1,146 @@
-# 🎂 Happy Birthday My Love - 30/04/2027
-**Website sinh nhật đặc biệt dành tặng em ❤️**
+# 💖 Love Puzzle – Ghép Nối Tình Yêu
 
-Trang web tình yêu dưới dạng **trò chơi ghép hình** (Jigsaw Puzzle) – món quà ý nghĩa nhất từ anh.
-
----
-
-## 🌟 Giới thiệu
-
-Sinh nhật em lần thứ **19** (30/04/2007).  
-Anh muốn biến ngày đặc biệt này thành một hành trình ngọt ngào, nơi em phải tự tay ghép những mảnh ký ức và tình cảm của chúng ta lại để khám phá hết tình yêu anh dành cho em.
-
-**Concept chính:** "Ghép Nối Tình Yêu" – Love Jigsaw Puzzle Game
+**Món quà sinh nhật 19 tuổi dành tặng em (30/04/2027)**
 
 ---
 
-## 🎮 Concept & Ý tưởng
+## 🎮 Game Overview
 
-### Concept chính
-- **Tên game**: Ghép Nối Tình Yêu
-- **Cốt truyện**: Anh đã cắt nhỏ những khoảnh khắc đẹp nhất và những lời yêu thương sâu sắc nhất thành từng mảnh ghép. Em là người duy nhất có thể ghép lại để thấy bức tranh hoàn chỉnh của tình yêu.
-- **Số level**: **5 levels**
+* **Tên game:** Ghép Nối Tình Yêu – *Love Jigsaw Puzzle*
+* **Phong cách:** Lãng mạn, dễ thương, mobile-first
+* **Trải nghiệm:** Nhẹ nhàng, cảm xúc, mang tính cá nhân
 
-| Level | Tên bức tranh                          | Độ khó | Phần thưởng khi hoàn thành                          |
-|-------|----------------------------------------|--------|-----------------------------------------------------|
-| 1     | Tin nhắn đầu tiên                      | Dễ     | Lời nhắn ngọt ngào + hiệu ứng trái tim              |
-| 2     | First date cùng nhau                   | Dễ     | Audio voice anh kể lại                              |
-| 3     | Tấm hình chung đầu tiên                | Trung  | Thư tình hiện dần                                   |
-| 4     | Em trong mắt anh                       | Trung  | Hiệu ứng đặc biệt + nhạc nền lãng mạn              |
-| 5     | Em là điều tuyệt vời nhất anh có       | Khó    | Video chúc mừng sinh nhật + **Mở Dashboard Chọn Quà** |
-
-**Tính năng nổi bật:**
-- Kéo thả ghép hình (drag & drop) mượt mà
-- Hint giới hạn (3 lần/level)
-- Timer + điểm số
-- Hiệu ứng confetti + âm thanh click dễ thương
-- Mobile friendly 100%
-- Nhạc nền (có nút bật/tắt)
-- Password bảo vệ
-- **Dashboard chọn quà** khi hoàn thành tất cả levels (rất hay như anh nói ❤️)
-
-### Ý tưởng Dashboard Chọn Quà (Final Reward)
-Khi em ghép xong Level 5, sẽ hiện ra một trang **"Món quà dành cho em"** với các lựa chọn:
-- Quà vật lý (hoa, quà tặng, date plan…)
-- Quà trải nghiệm (đi chơi, ăn tối, xem phim…)
-- Quà kỹ thuật số (ảnh ghép, video dài, playlist…)
-- Em được chọn 1 hoặc nhiều món anh sẽ thực hiện
+> Anh đã cắt nhỏ những khoảnh khắc đẹp nhất của chúng ta thành từng mảnh ghép.
+> Em là người duy nhất có thể ghép lại để khám phá hết tình yêu anh dành cho em.
 
 ---
 
-## 🛠 Công nghệ & Tech Stack
+## 💡 Concept
 
-- **HTML5 + SCSS + Vanilla JavaScript**
-- Thư viện: Canvas puzzle, canvas-confetti, Howler.js
-- Responsive + Mobile-first
-
-**Deploy**: Vercel / Netlify
-
----
-
-## 📋 Technical Plan (Đang thực hiện)
-
-### Phase 1: Setup (Hoàn thành)
-- [x] Cấu trúc dự án + SCSS
-- [x] UI/UX + 5 ảnh levels
-- [x] README cập nhật
-
-### Phase 2: Core Features (Đang làm)
-- [ ] Hệ thống puzzle 5 levels
-- [ ] Win condition + confetti
-- [ ] Hint, Timer, Progress
-- [ ] **Dashboard chọn quà** sau Level 5
-
-### Phase 3: Romantic Content
-- [ ] Lời nhắn, audio, video, thư tình từng level
-- [ ] Password + Dashboard quà tặng
-
-### Phase 4: Polish & Test
-- [ ] Test mobile + deploy
-
-**Tổng thời gian ước tính:** 7-10 ngày (part-time)
+* **Chủ đề:** *“Ghép Nối Tình Yêu”*
+* **Số level:** 5
+* **Mục tiêu:**
+  Hoàn thành toàn bộ levels → mở khóa **Dashboard chọn quà đặc biệt**
 
 ---
 
-## 🚀 Roadmap
+## 🧩 Levels Design
 
-- **v1.0 (30/04/2026)**: 5 levels + Dashboard chọn quà hoàn chỉnh
-- **v1.1**: Thêm animation mượt + nhiều lựa chọn quà
-- **v1.2**: Mini-game bổ sung (tùy chọn)
+| Level | Tên                              | Grid | Độ khó     | Phần thưởng                      |
+| ----- | -------------------------------- | ---- | ---------- | -------------------------------- |
+| 1     | Tin nhắn đầu tiên                | 4×4  | Dễ         | Lời nhắn ngọt ngào + hiệu ứng ❤️ |
+| 2     | First date cùng nhau             | 5×5  | Dễ         | Audio voice anh kể lại           |
+| 3     | Tấm hình chung đầu tiên          | 6×6  | Trung bình | Thư tình hiện dần                |
+| 4     | Em trong mắt anh                 | 6×6  | Trung bình | Hiệu ứng đặc biệt + nhạc nền     |
+| 5     | Em là điều tuyệt vời nhất anh có | 7×7  | Khó        | 🎥 Video chúc mừng + Dashboard   |
 
 ---
 
-## 📁 Cấu trúc thư mục hiện tại
+## ⚙️ Core Gameplay
 
-```markdown
+* Drag & Drop mượt (Pointer Events – mobile optimized)
+* Snap tự động khi khoảng cách < **20px**
+* **Hint:** 3 lần / level (highlight 1 mảnh đúng)
+* Timer hiển thị thời gian hoàn thành
+* Nhạc nền (toggle on/off)
+* Hiệu ứng **confetti** khi hoàn thành
+* Lưu tiến độ bằng **localStorage**
+
+---
+
+## 🎁 Final Reward – Dashboard
+
+Sau khi hoàn thành Level 5:
+
+### 💝 “Món quà dành cho em”
+
+* 5–6 lựa chọn:
+
+  * 🎁 Quà vật lý (hoa, quà tặng…)
+  * 🍽️ Trải nghiệm (date, ăn tối, xem phim…)
+  * 💻 Kỹ thuật số (playlist, video, ảnh…)
+
+* Cho phép:
+
+  * Chọn **1 hoặc nhiều món**
+  * Gửi lựa chọn qua:
+
+    * Telegram
+    * Zalo
+
+---
+
+## 🧱 Tech Stack (Mỳ Ăn Liền)
+
+| Phần          | Công nghệ               | Lý do                |
+| ------------- | ----------------------- | -------------------- |
+| Bundler       | Vite                    | Build cực nhanh      |
+| Language      | TypeScript + Vanilla JS | An toàn, dễ maintain |
+| Styling       | SCSS                    | Linh hoạt            |
+| Puzzle Engine | HTML5 Canvas            | Mượt trên mobile     |
+| Effects       | canvas-confetti         | Nhẹ                  |
+| Audio         | Native Audio API        | Đơn giản             |
+| Storage       | localStorage            | Lưu progress         |
+| Deploy        | Vercel                  | 1-click deploy       |
+
+---
+
+## 📁 Project Structure
+
+```bash
 love-puzzle-birthday/
 ├── index.html
-├── css/style.css
-├── scss/ (style.scss + partials)
-├── js/
-│   ├── main.js
-│   ├── puzzle.js
-│   └── confetti.js
-├── assets/
-│   ├── images/ (level_1.jpg → level_5.jpg)
+├── vite.config.js
+├── tsconfig.json
+├── src/
+│   ├── main.ts
+│   ├── game/
+│   │   ├── Puzzle.ts
+│   │   ├── PuzzleRenderer.ts
+│   │   ├── PuzzleDrag.ts
+│   │   └── types.ts
+│   ├── ui/
+│   │   ├── LevelScreen.ts
+│   │   ├── Dashboard.ts
+│   │   └── RomanticOverlay.ts
+│   ├── utils/
+│   │   ├── storage.ts
+│   │   ├── timer.ts
+│   │   ├── confetti.ts
+│   │   └── audio.ts
+│   └── content/
+│       └── romantic-content.ts
+├── public/assets/
+│   ├── images/
 │   ├── audio/
 │   └── video/
-├── README.md
-├── package.json
-└── .gitignore
+└── styles/style.scss
+```
+
+---
+
+## 📱 Mobile-First Checklist (Bắt buộc)
+
+* Viewport meta + responsive layout
+* Canvas max **640px**, giữ tỷ lệ ảnh
+* Pointer Events cho drag & drop
+* `touch-action: none` + disable scroll khi drag
+* Safe area cho iPhone
+* Button ≥ **44px**
+
+## ⚠️ Nguyên tắc “Mỳ Ăn Liền”
+
+* Ưu tiên **trải nghiệm & cảm xúc**
+* Tránh over-engineering
+* Code **đủ sạch để maintain**
+* Mục tiêu: **Ship nhanh + đẹp + ý nghĩa**
+
+---
+
+## 🎯 Final Note
+
+Đây không chỉ là một mini game.
+Đây là một trải nghiệm cá nhân hóa — nơi từng mảnh ghép là một ký ức,
+và người chơi chính là người hoàn thiện câu chuyện.
+
+---

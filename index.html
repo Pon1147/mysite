@@ -13,7 +13,8 @@
 </head>
 <body>
     <div class="container">
-        <!-- Password Screen -->
+
+        <!-- ==================== PASSWORD SCREEN ==================== -->
         <div id="password-screen" class="screen active">
             <div class="lock-box">
                 <div class="heart-icon">💖</div>
@@ -29,7 +30,7 @@
             </div>
         </div>
 
-        <!-- Main Game Screen -->
+        <!-- ==================== MAIN MENU SCREEN ==================== -->
         <div id="main-screen" class="screen">
             <header>
                 <h1>Ghép Nối Tình Yêu</h1>
@@ -41,9 +42,79 @@
             </header>
 
             <div class="levels-grid">
-                <!-- Level cards sẽ được JS thêm vào sau -->
+                <!-- Level cards được JS tạo động -->
             </div>
         </div>
+
+        <!-- ==================== PUZZLE SCREEN ==================== -->
+        <div id="puzzle-screen" class="screen">
+            <div class="puzzle-header">
+                <button onclick="backToMenu()" class="back-btn">← Quay lại</button>
+                <h2 id="level-title">Level 1 - Tin nhắn đầu tiên</h2>
+                <div class="progress-info">
+                    <span id="timer" class="timer">00:00</span>
+                </div>
+            </div>
+            
+            <div class="puzzle-container">
+                <div class="split-puzzle">
+                    <section class="piece-bank-wrap">
+                        <h3>Kho mảnh ghép</h3>
+                        <div id="piece-bank" class="piece-bank"></div>
+                    </section>
+                    <section class="board-wrap">
+                        <h3>Bảng ghép</h3>
+                        <div id="puzzle-board" class="puzzle-board"></div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="puzzle-controls">
+                <button onclick="giveHint()" class="hint-btn">💡 Hint (3)</button>
+                <button onclick="backToMenu()" class="back-btn">Thoát</button>
+            </div>
+        </div>
+
+        <!-- ==================== FINAL DASHBOARD - CHỌN QUÀ ==================== -->
+        <div id="dashboard-screen" class="screen">
+            <div class="dashboard">
+                <div class="congrats">
+                    <h1>🎉 Chúc mừng em đã ghép xong tất cả!</h1>
+                    <p>Em là điều tuyệt vời nhất anh có ❤️</p>
+                </div>
+
+                <h2 class="dashboard-title">Món quà anh dành cho em</h2>
+                <p class="dashboard-subtitle">Em được chọn những món quà sau, anh sẽ thực hiện hết:</p>
+
+                <div class="gift-options">
+                    <div class="gift-card" onclick="selectGift(this)">
+                        <span>🌹</span>
+                        <h3>Bó hoa tươi + Date lãng mạn</h3>
+                    </div>
+                    <div class="gift-card" onclick="selectGift(this)">
+                        <span>🍽️</span>
+                        <h3>Ăn tối cao cấp + Xem phim</h3>
+                    </div>
+                    <div class="gift-card" onclick="selectGift(this)">
+                        <span>📸</span>
+                        <h3>Chụp bộ ảnh đôi chuyên nghiệp</h3>
+                    </div>
+                    <div class="gift-card" onclick="selectGift(this)">
+                        <span>🎁</span>
+                        <h3>Quà bất ngờ (Anh sẽ chuẩn bị)</h3>
+                    </div>
+                    <div class="gift-card" onclick="selectGift(this)">
+                        <span>✈️</span>
+                        <h3>Chuyến đi ngắn ngày cuối tuần</h3>
+                    </div>
+                </div>
+
+                <button onclick="restartGame()" class="restart-btn">
+                    Chơi lại từ đầu
+                </button>
+            </div>
+        </div>
+
     </div>
 
     <script src="js/main.js"></script>

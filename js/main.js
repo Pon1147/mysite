@@ -1,76 +1,202 @@
-// ==================== MAIN.JS - Ghép Nối Tình Yêu ====================
+// ==================== MAIN.JS - Ghep Noi Tinh Yeu ====================
+
+const totalLevels = 5;
+const maxHintsPerLevel = 3;
+const correctPassword = "1903"; // TODO: replace with your real password
+
+const levelData = [
+    { num: 1, title: "Tin nhan dau tien", difficulty: "De" },
+    { num: 2, title: "First date cung nhau", difficulty: "De" },
+    { num: 3, title: "Tam hinh chung dau tien", difficulty: "Trung binh" },
+    { num: 4, title: "Em trong mat anh", difficulty: "Trung binh" },
+    { num: 5, title: "Em la dieu tuyet voi nhat anh co", difficulty: "Kho" }
+];
 
 let currentLevel = 1;
-let passwordCorrect = false;
+let completedLevels = 0;
+let timerInterval = null;
+let levelStartTime = 0;
+let hintsRemaining = maxHintsPerLevel;
 
-// ==================== PASSWORD SYSTEM ====================
-function checkPassword() {
-    const input = document.getElementById('password-input');
-    const enteredPassword = input.value.trim();
-
-    // TODO: Anh sẽ cho mình biết mật khẩu chính xác
-    const correctPassword = "1903";   // ← Anh phải điền vào đây
-
-    if (enteredPassword === correctPassword) {
-        passwordCorrect = true;
-        document.getElementById('password-screen').classList.remove('active');
-        document.getElementById('main-screen').classList.add('active');
-        
-        // Tạo các level card
-        createLevelCards();
-        
-        // Phát nhạc nền (sẽ config sau)
-        console.log("🎉 Mật khẩu đúng! Chào mừng em đến với món quà của anh.");
-    } else {
-        input.style.borderColor = '#ff0000';
-        input.value = '';
-        input.placeholder = 'Sai rồi, thử lại nhé ❤️';
-        
-        setTimeout(() => {
-            input.style.borderColor = '#ff4d94';
-            input.placeholder = 'ddmm (ngày quen nhau)';
-        }, 2000);
-    }
+function showScreen(screenId) {
+    document.querySelectorAll(".screen").forEach((screen) => {
+        screen.classList.remove("active");
+    });
+    document.getElementById(screenId).classList.add("active");
 }
 
-// ==================== TẠO LEVEL CARDS ====================
+function checkPassword() {
+    const input = document.getElementById("password-input");
+    const entered = input.value.trim();
+
+    if (entered === correctPassword) {
+        input.value = "";
+        showScreen("main-screen");
+        createLevelCards();
+        return;
+    }
+
+    input.style.borderColor = "#ff3b30";
+    input.value = "";
+    input.placeholder = "Sai mat khau, thu lai nhe";
+    setTimeout(() => {
+        input.style.borderColor = "#ff4d94";
+        input.placeholder = "ddmm (ngay quen nhau)";
+    }, 1800);
+}
+
 function createLevelCards() {
-    const grid = document.querySelector('.levels-grid');
-    grid.innerHTML = '';
+    const grid = document.querySelector(".levels-grid");
+    const unlockedLevel = completedLevels + 1;
 
-    const levels = [
-        { num: 1, title: "Ngày đầu gặp nhau", difficulty: "Dễ" },
-        { num: 2, title: "Kỷ niệm đáng nhớ nhất", difficulty: "Dễ" },
-        { num: 3, title: "Em trong mắt anh", difficulty: "Trung bình" },
-        { num: 4, title: "Tương lai của chúng ta", difficulty: "Trung bình" }
-    ];
+    grid.innerHTML = `
+        <div class="progress-wrap">
+            <div class="progress-label">Tien do: ${completedLevels}/${totalLevels} level</div>
+            <div class="progress-bar"><div class="progress" style="width:${(completedLevels / totalLevels) * 100}%"></div></div>
+        </div>
+    `;
 
-    levels.forEach(level => {
-        const card = document.createElement('div');
-        card.className = 'level-card';
-        card.dataset.level = level.num;
+    levelData.forEach((level) => {
+        const isLocked = level.num > unlockedLevel;
+        const isDone = level.num <= completedLevels;
+        const card = document.createElement("div");
+        card.className = `level-card ${isLocked ? "locked" : ""} ${isDone ? "done" : ""}`.trim();
+        card.dataset.level = String(level.num);
+
         card.innerHTML = `
-            <div class="level-number">Level ${level.num}</div>
+            <div class="level-number">L${level.num}</div>
             <h3>${level.title}</h3>
             <span class="difficulty">${level.difficulty}</span>
-            <button onclick="startLevel(${level.num})">Bắt đầu ghép</button>
+            <button onclick="startLevel(${level.num})" ${isLocked ? "disabled" : ""}>
+                ${isDone ? "Choi lai" : (isLocked ? "Da khoa" : "Bat dau ghep")}
+            </button>
         `;
+
         grid.appendChild(card);
     });
 }
 
-// ==================== PLACEHOLDER - Sẽ code sau ====================
-function startLevel(level) {
-    console.log(`Bắt đầu Level ${level}`);
-    alert(`Đang mở Level ${level}...\n\n(Mình sẽ code puzzle sau khi anh xác nhận một số thông tin)`);
+function updateHintButton() {
+    const hintBtn = document.querySelector(".hint-btn");
+    if (!hintBtn) return;
+    hintBtn.textContent = `Hint (${hintsRemaining})`;
+    hintBtn.disabled = hintsRemaining <= 0;
 }
 
-// Event listener cho Enter trên password
-document.addEventListener('DOMContentLoaded', () => {
-    const pwInput = document.getElementById('password-input');
-    pwInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            checkPassword();
-        }
+function startTimer() {
+    const timerEl = document.getElementById("timer");
+    levelStartTime = Date.now();
+    stopTimer();
+
+    timerInterval = setInterval(() => {
+        const elapsed = Math.floor((Date.now() - levelStartTime) / 1000);
+        timerEl.textContent = formatTime(elapsed);
+    }, 500);
+}
+
+function stopTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+    }
+}
+
+function formatTime(totalSeconds) {
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0");
+    const seconds = String(totalSeconds % 60).padStart(2, "0");
+    return `${minutes}:${seconds}`;
+}
+
+function startLevel(level) {
+    if (level > completedLevels + 1) return;
+
+    currentLevel = level;
+    hintsRemaining = maxHintsPerLevel;
+
+    const levelTitle = levelData[level - 1]?.title || `Level ${level}`;
+    document.getElementById("level-title").textContent = `Level ${level} - ${levelTitle}`;
+    document.getElementById("timer").textContent = "00:00";
+
+    updateHintButton();
+    showScreen("puzzle-screen");
+    startTimer();
+    window.initPuzzle(level);
+}
+
+function giveHint() {
+    if (hintsRemaining <= 0) return;
+    if (typeof window.showPuzzleHint !== "function") return;
+
+    const didApplyHint = window.showPuzzleHint();
+    if (didApplyHint) {
+        hintsRemaining -= 1;
+        updateHintButton();
+    }
+}
+
+function backToMenu() {
+    stopTimer();
+    showScreen("main-screen");
+    createLevelCards();
+}
+
+function completeLevel() {
+    stopTimer();
+    completedLevels = Math.max(completedLevels, currentLevel);
+
+    if (typeof window.triggerConfetti === "function") {
+        window.triggerConfetti(140);
+    }
+
+    if (completedLevels >= totalLevels) {
+        setTimeout(showFinalDashboard, 600);
+        return;
+    }
+
+    setTimeout(() => {
+        alert(`Hoan thanh Level ${currentLevel}!`);
+        showScreen("main-screen");
+        createLevelCards();
+    }, 450);
+}
+
+function showFinalDashboard() {
+    showScreen("dashboard-screen");
+    if (typeof window.triggerConfetti === "function") {
+        setTimeout(() => window.triggerConfetti(220), 250);
+        setTimeout(() => window.triggerConfetti(260), 950);
+    }
+}
+
+function selectGift(cardElement) {
+    cardElement.classList.toggle("selected");
+}
+
+function restartGame() {
+    completedLevels = 0;
+    currentLevel = 1;
+    hintsRemaining = maxHintsPerLevel;
+    showScreen("main-screen");
+    createLevelCards();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const pwInput = document.getElementById("password-input");
+    pwInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") checkPassword();
     });
+});
+
+window.checkPassword = checkPassword;
+window.startLevel = startLevel;
+window.completeLevel = completeLevel;
+window.backToMenu = backToMenu;
+window.giveHint = giveHint;
+window.selectGift = selectGift;
+window.restartGame = restartGame;
+
+window.addEventListener("resize", () => {
+    if (document.getElementById("puzzle-screen").classList.contains("active")) {
+        window.initPuzzle(currentLevel);
+    }
 });

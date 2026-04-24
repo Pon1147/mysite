@@ -57,6 +57,15 @@ header .music-control button:hover {
   padding: 20px 0;
 }
 
+.progress-wrap {
+  grid-column: 1/-1;
+}
+.progress-wrap .progress-label {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #5d2a4e;
+}
+
 .level-card {
   background: white;
   border-radius: 24px;
@@ -116,6 +125,264 @@ header .music-control button:hover {
   pointer-events: none;
   filter: grayscale(80%);
 }
+.level-card.done {
+  border-color: #31c96e;
+}
+
+.puzzle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.puzzle-header .back-btn {
+  background: transparent;
+  border: 2px solid #ff4d94;
+  color: #ff4d94;
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.puzzle-header .progress-info .timer {
+  display: inline-block;
+  border-radius: 999px;
+  background: #fff0f6;
+  color: #ff4d94;
+  font-weight: 600;
+  padding: 8px 14px;
+}
+.puzzle-header h2 {
+  font-family: "Dancing Script", cursive;
+  color: #5d2a4e;
+  margin: 0;
+  font-size: 1.45rem;
+  text-align: center;
+  flex: 1;
+}
+
+.puzzle-container {
+  padding: 15px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
+  margin-bottom: 20px;
+}
+
+.split-puzzle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.piece-bank-wrap,
+.board-wrap {
+  background: #fff9fc;
+  border: 1px solid #ffe3f0;
+  border-radius: 18px;
+  padding: 12px;
+}
+.piece-bank-wrap h3,
+.board-wrap h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #5d2a4e;
+  text-align: center;
+}
+
+.piece-bank {
+  display: grid;
+  gap: 8px;
+  justify-content: center;
+  align-content: start;
+  min-height: 220px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.puzzle-board {
+  display: grid;
+  gap: 0;
+  justify-content: center;
+  border: 2px solid #ff8fbe;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff9fd;
+  min-width: 220px;
+  min-height: 280px;
+}
+
+.board-slot {
+  border: 1px dashed #ffb8d4;
+  min-width: 20px;
+  min-height: 20px;
+  position: relative;
+  background: linear-gradient(135deg, #fff, #ffeef7);
+}
+.board-slot.can-drop {
+  background: #ffeaf5;
+}
+.board-slot.wrong-drop {
+  animation: shake-slot 0.25s linear;
+}
+
+.puzzle-piece {
+  background-repeat: no-repeat;
+  background-color: #fff;
+  border: 1px solid rgba(255, 77, 148, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  cursor: grab;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.puzzle-piece:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.16);
+}
+.puzzle-piece.dragging {
+  opacity: 0.75;
+  cursor: grabbing;
+}
+.puzzle-piece.locked {
+  border: none;
+  border-radius: 0;
+}
+
+@keyframes shake-slot {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.puzzle-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.puzzle-controls button {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.puzzle-controls .hint-btn {
+  background: #ffec99;
+  color: #7a5600;
+}
+.puzzle-controls .hint-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.puzzle-controls .back-btn {
+  background: #ffe6f2;
+  color: #ff4d94;
+}
+
+.dashboard {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px 30px;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 20px 60px rgba(255, 77, 148, 0.25);
+  text-align: center;
+}
+
+.congrats {
+  margin-bottom: 30px;
+}
+.congrats h1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 2.8rem;
+  color: #ff4d94;
+  margin-bottom: 10px;
+}
+.congrats p {
+  font-size: 1.4rem;
+  color: #5d2a4e;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  color: #5d2a4e;
+  margin: 20px 0 8px;
+}
+
+.dashboard-subtitle {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.gift-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 40px;
+}
+
+.gift-card {
+  background: #fff0f5;
+  border: 3px solid transparent;
+  border-radius: 24px;
+  padding: 24px 16px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+.gift-card:hover {
+  border-color: #ff4d94;
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 15px 35px rgba(255, 77, 148, 0.2);
+}
+.gift-card span {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.gift-card h3 {
+  font-size: 1.25rem;
+  color: #5d2a4e;
+  margin: 0;
+}
+.gift-card.selected {
+  border-color: #ff4d94;
+  background: #ffe6f2;
+}
+
+.restart-btn {
+  background: linear-gradient(135deg, #ff4d94, #c026d3);
+  color: white;
+  border: none;
+  padding: 16px 50px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+.restart-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
+}
 
 .progress-bar {
   height: 8px;
@@ -131,6 +398,21 @@ header .music-control button:hover {
   transition: width 0.6s ease;
 }
 
+@media (max-width: 768px) {
+  .puzzle-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .split-puzzle {
+    grid-template-columns: 1fr;
+  }
+  .piece-bank {
+    max-height: 34vh;
+  }
+  .congrats h1 {
+    font-size: 2rem;
+  }
+}
 .screen {
   display: none;
 }
@@ -146,6 +428,11 @@ header .music-control button:hover {
 .lock-box h1 {
   font-size: 4.5rem;
   margin-bottom: 1rem;
+}
+.lock-box h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #5d2a4e;
 }
 .lock-box input {
   padding: 16px 24px;
@@ -177,4 +464,17 @@ header .music-control button:hover {
   background: #c026d3;
   transform: scale(1.08);
   box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
-}/*# sourceMappingURL=style.css.map */
+}
+.lock-box .hint {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .lock-box input {
+    width: min(320px, 90vw);
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
