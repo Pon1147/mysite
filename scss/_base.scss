@@ -1,0 +1,21 @@
+@import 'variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-main;
+  background: linear-gradient(135deg, $light-pink, #f0e6ff);
+  color: $dark-pink;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}

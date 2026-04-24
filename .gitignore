@@ -1,0 +1,48 @@
+# ==================== .gitignore cho Ghép Nối Tình Yêu ====================
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Sass compiled files (chỉ giữ source SCSS)
+# css/style.css  <- comment dòng này nếu anh muốn commit file CSS đã compile
+
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# Editor & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build / Dist (nếu có sau này)
+dist/
+build/
+
+# Temporary files
+*.tmp
+*.log
+
+# Assets lớn (nếu anh không muốn commit video/audio nặng)
+# assets/video/*
+# assets/audio/*.mp3
+# assets/images/* (nếu quá lớn, anh có thể uncomment)
+
+# Password & sensitive info (đề phòng)
+password.txt
+secrets.json
+
+# ==================== KEEP ====================
+# !assets/images/*.jpg
+# !assets/images/*.png
+# !assets/images/*.jpeg

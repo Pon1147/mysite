@@ -16,5 +16,8 @@
     "url": "https://github.com/Pon1147/mysite/issues"
   },
   "homepage": "https://github.com/Pon1147/mysite#readme",
-  "description": ""
+  "description": "**Website sinh nhật đặc biệt dành tặng em ❤️**",
+  "devDependencies": {
+    "sass": "^1.99.0"
+  }
 }
