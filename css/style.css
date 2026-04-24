@@ -10,51 +10,71 @@ body {
   color: #5d2a4e;
   min-height: 100vh;
   line-height: 1.6;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+body.dragging-piece {
+  overflow: hidden;
+  touch-action: none;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 12px;
 }
 
+@media (min-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+}
 header {
   text-align: center;
-  margin-bottom: 3rem;
-  padding: 20px 0;
+  margin-bottom: 1.25rem;
+  padding: 10px 0;
 }
 header h1 {
   font-family: "Dancing Script", cursive;
-  font-size: 3.2rem;
+  font-size: clamp(2rem, 8vw, 3.2rem);
   color: #ff4d94;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  line-height: 1.1;
 }
 header .subtitle {
-  font-size: 1.1rem;
-  opacity: 0.85;
+  font-size: 0.98rem;
+  opacity: 0.88;
 }
 header .music-control {
-  margin-top: 15px;
+  margin-top: 12px;
 }
 header .music-control button {
   background: rgba(255, 77, 148, 0.1);
   color: #ff4d94;
   border: 2px solid #ff4d94;
-  padding: 10px 20px;
-  border-radius: 50px;
+  padding: 10px 18px;
+  min-height: 44px;
+  border-radius: 999px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: 0.25s;
 }
 header .music-control button:hover {
   background: #ff4d94;
   color: white;
 }
+header .music-control button:focus-visible {
+  outline: 3px solid rgba(192, 38, 211, 0.35);
+  outline-offset: 2px;
+}
 
 .levels-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 25px;
-  padding: 20px 0;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  padding: 10px 0;
 }
 
 .progress-wrap {
@@ -68,33 +88,35 @@ header .music-control button:hover {
 
 .level-card {
   background: white;
-  border-radius: 24px;
-  padding: 24px;
+  border-radius: 18px;
+  padding: 18px 14px;
   text-align: center;
   box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
-  transition: all 0.4s ease;
+  transition: 0.28s ease;
   border: 2px solid transparent;
 }
 .level-card:hover {
-  transform: translateY(-12px);
+  transform: translateY(-4px);
   border-color: #ff4d94;
-  box-shadow: 0 20px 40px rgba(255, 77, 148, 0.25);
+  box-shadow: 0 12px 24px rgba(255, 77, 148, 0.22);
 }
 .level-card .level-number {
-  display: inline-block;
+  display: inline-grid;
+  place-items: center;
   background: #ff4d94;
   color: white;
-  width: 48px;
-  height: 48px;
-  line-height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .level-card h3 {
-  margin: 12px 0 16px;
-  font-size: 1.35rem;
+  margin: 8px 0 14px;
+  font-size: clamp(1.25rem, 4.8vw, 1.9rem);
+  line-height: 1.25;
   color: #5d2a4e;
+  word-break: break-word;
 }
 .level-card .difficulty {
   display: inline-block;
@@ -103,48 +125,55 @@ header .music-control button:hover {
   color: #ff4d94;
   border-radius: 30px;
   font-size: 0.9rem;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .level-card button {
   background: #ff4d94;
   color: white;
   border: none;
-  padding: 14px 32px;
-  border-radius: 50px;
-  font-size: 1.05rem;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 1rem;
+  min-height: 44px;
   cursor: pointer;
   width: 100%;
-  transition: 0.3s;
+  transition: 0.22s;
 }
 .level-card button:hover {
   background: #c026d3;
-  transform: scale(1.03);
+}
+.level-card button:focus-visible {
+  outline: 3px solid rgba(192, 38, 211, 0.35);
+  outline-offset: 2px;
 }
 .level-card.locked {
-  opacity: 0.6;
-  pointer-events: none;
-  filter: grayscale(80%);
+  opacity: 0.84;
+  filter: grayscale(30%);
+}
+.level-card.locked button {
+  cursor: not-allowed;
 }
 .level-card.done {
   border-color: #31c96e;
 }
 
 .puzzle-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  padding: 12px;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 .puzzle-header .back-btn {
   background: transparent;
   border: 2px solid #ff4d94;
   color: #ff4d94;
   padding: 8px 16px;
-  border-radius: 50px;
+  min-height: 44px;
+  border-radius: 999px;
   cursor: pointer;
   font-size: 0.95rem;
 }
@@ -160,23 +189,24 @@ header .music-control button:hover {
   font-family: "Dancing Script", cursive;
   color: #5d2a4e;
   margin: 0;
-  font-size: 1.45rem;
+  font-size: clamp(1.4rem, 5.8vw, 2rem);
   text-align: center;
-  flex: 1;
+  line-height: 1.2;
 }
 
 .puzzle-container {
-  padding: 15px;
+  padding: 10px;
   background: white;
-  border-radius: 24px;
+  border-radius: 16px;
   box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  overflow-x: auto;
 }
 
 .split-puzzle {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   align-items: start;
 }
 
@@ -184,8 +214,10 @@ header .music-control button:hover {
 .board-wrap {
   background: #fff9fc;
   border: 1px solid #ffe3f0;
-  border-radius: 18px;
-  padding: 12px;
+  border-radius: 0;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
 }
 .piece-bank-wrap h3,
 .board-wrap h3 {
@@ -200,10 +232,11 @@ header .music-control button:hover {
   gap: 8px;
   justify-content: center;
   align-content: start;
-  min-height: 220px;
-  max-height: 60vh;
+  width: 100%;
+  min-height: 160px;
+  max-height: 36vh;
   overflow-y: auto;
-  padding: 4px;
+  padding: 2px;
 }
 
 .puzzle-board {
@@ -211,7 +244,7 @@ header .music-control button:hover {
   gap: 0;
   justify-content: center;
   border: 2px solid #ff8fbe;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
   background: #fff9fd;
   min-width: 220px;
@@ -236,10 +269,12 @@ header .music-control button:hover {
   background-repeat: no-repeat;
   background-color: #fff;
   border: 1px solid rgba(255, 77, 148, 0.16);
-  border-radius: 8px;
+  border-radius: 0;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
   cursor: grab;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
+  touch-action: none;
+  user-select: none;
 }
 .puzzle-piece:hover {
   transform: translateY(-1px);
@@ -248,10 +283,17 @@ header .music-control button:hover {
 .puzzle-piece.dragging {
   opacity: 0.75;
   cursor: grabbing;
+  transition: none;
+  will-change: transform;
 }
 .puzzle-piece.locked {
   border: none;
   border-radius: 0;
+}
+.puzzle-piece.hint-piece {
+  outline: 3px solid #ffd166;
+  outline-offset: 1px;
+  animation: pulse-piece 0.45s ease-in-out 2;
 }
 
 @keyframes shake-slot {
@@ -272,15 +314,15 @@ header .music-control button:hover {
   }
 }
 .puzzle-controls {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
 }
 .puzzle-controls button {
   border: none;
   border-radius: 999px;
   padding: 12px 20px;
+  min-height: 44px;
   cursor: pointer;
   font-weight: 600;
 }
@@ -297,69 +339,87 @@ header .music-control button:hover {
   color: #ff4d94;
 }
 
+.board-slot.hint-slot {
+  box-shadow: inset 0 0 0 3px #ffd166;
+  background: #fff6d8;
+}
+
+@keyframes pulse-piece {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .dashboard {
   max-width: 800px;
-  margin: 40px auto;
-  padding: 40px 30px;
+  margin: 14px auto;
+  padding: 20px 14px;
   background: white;
-  border-radius: 32px;
-  box-shadow: 0 20px 60px rgba(255, 77, 148, 0.25);
+  border-radius: 22px;
+  box-shadow: 0 14px 32px rgba(255, 77, 148, 0.2);
   text-align: center;
 }
 
 .congrats {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .congrats h1 {
   font-family: "Dancing Script", cursive;
-  font-size: 2.8rem;
+  font-size: clamp(1.8rem, 7vw, 2.8rem);
   color: #ff4d94;
   margin-bottom: 10px;
+  line-height: 1.2;
 }
 .congrats p {
-  font-size: 1.4rem;
+  font-size: 1.08rem;
   color: #5d2a4e;
 }
 
 .dashboard-title {
-  font-size: 2rem;
+  font-size: clamp(1.3rem, 5vw, 2rem);
   color: #5d2a4e;
-  margin: 20px 0 8px;
+  margin: 16px 0 8px;
 }
 
 .dashboard-subtitle {
   color: #666;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .gift-options {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 18px;
-  margin-bottom: 40px;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .gift-card {
   background: #fff0f5;
   border: 3px solid transparent;
-  border-radius: 24px;
-  padding: 24px 16px;
+  border-radius: 18px;
+  padding: 16px 12px;
   cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.28s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 .gift-card:hover {
   border-color: #ff4d94;
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 15px 35px rgba(255, 77, 148, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(255, 77, 148, 0.2);
 }
 .gift-card span {
-  font-size: 3rem;
+  font-size: 1.6rem;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 .gift-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   color: #5d2a4e;
   margin: 0;
 }
@@ -372,23 +432,48 @@ header .music-control button:hover {
   background: linear-gradient(135deg, #ff4d94, #c026d3);
   color: white;
   border: none;
-  padding: 16px 50px;
-  font-size: 1.2rem;
-  border-radius: 50px;
+  width: 100%;
+  padding: 14px 24px;
+  min-height: 44px;
+  font-size: 1.05rem;
+  border-radius: 999px;
   cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
+  margin-top: 8px;
+  transition: 0.22s;
 }
 .restart-btn:hover {
-  transform: scale(1.08);
+  transform: scale(1.02);
   box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
+}
+
+.share-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.share-btn {
+  border: none;
+  min-height: 44px;
+  border-radius: 999px;
+  padding: 12px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+}
+.share-btn.telegram {
+  background: #2aabee;
+}
+.share-btn.zalo {
+  background: #0068ff;
 }
 
 .progress-bar {
   height: 8px;
   background: #ffe6f2;
   border-radius: 20px;
-  margin: 30px 0;
+  margin: 18px 0;
   overflow: hidden;
 }
 .progress-bar .progress {
@@ -398,19 +483,56 @@ header .music-control button:hover {
   transition: width 0.6s ease;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 640px) {
+  .levels-grid {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .gift-options {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+  .share-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .puzzle-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 992px) {
+  header {
+    margin-bottom: 2rem;
+    padding: 20px 0;
+  }
+  .levels-grid {
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 22px;
+  }
   .puzzle-header {
-    flex-direction: column;
-    gap: 10px;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    justify-items: stretch;
+  }
+  .puzzle-header h2 {
+    text-align: center;
+  }
+  .puzzle-container {
+    padding: 14px;
   }
   .split-puzzle {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    gap: 18px;
+  }
+  .piece-bank-wrap,
+  .board-wrap {
+    width: fit-content;
   }
   .piece-bank {
-    max-height: 34vh;
+    max-height: 60vh;
   }
-  .congrats h1 {
-    font-size: 2rem;
+  .dashboard {
+    margin: 32px auto;
+    padding: 36px 28px;
   }
 }
 .screen {
@@ -423,25 +545,27 @@ header .music-control button:hover {
 
 .lock-box {
   text-align: center;
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 .lock-box h1 {
-  font-size: 4.5rem;
-  margin-bottom: 1rem;
+  font-size: clamp(2.4rem, 14vw, 4.5rem);
+  margin-bottom: 0.75rem;
+  line-height: 1.05;
 }
 .lock-box h2 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
   color: #5d2a4e;
+  line-height: 1.35;
 }
 .lock-box input {
-  padding: 16px 24px;
-  font-size: 1.25rem;
+  padding: 14px 18px;
+  font-size: 1.1rem;
   border: 3px solid #ff4d94;
   border-radius: 50px;
-  width: 320px;
+  width: min(320px, 92vw);
   text-align: center;
-  margin: 20px 0;
+  margin: 16px 0;
   outline: none;
   transition: all 0.3s;
 }
@@ -453,8 +577,10 @@ header .music-control button:hover {
   background: #ff4d94;
   color: #ffffff;
   border: none;
-  padding: 16px 48px;
-  font-size: 1.2rem;
+  width: min(320px, 92vw);
+  min-height: 44px;
+  padding: 12px 22px;
+  font-size: 1.05rem;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s;
@@ -466,14 +592,26 @@ header .music-control button:hover {
   box-shadow: 0 10px 30px rgba(255, 77, 148, 0.2);
 }
 .lock-box .hint {
-  margin-top: 14px;
-  font-size: 0.95rem;
+  margin-top: 12px;
+  font-size: 0.9rem;
   opacity: 0.8;
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
+  .lock-box {
+    margin-top: 14vh;
+  }
+  .lock-box h2 {
+    font-size: 1.1rem;
+  }
   .lock-box input {
-    width: min(320px, 90vw);
+    padding: 16px 24px;
+    font-size: 1.25rem;
+  }
+  .lock-box button {
+    width: auto;
+    padding: 16px 48px;
+    font-size: 1.2rem;
   }
 }
 

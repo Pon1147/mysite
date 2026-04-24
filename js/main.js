@@ -3,6 +3,7 @@
 const totalLevels = 5;
 const maxHintsPerLevel = 3;
 const correctPassword = "1903"; // TODO: replace with your real password
+const STORAGE_KEY = "lovePuzzleProgressV1";
 
 const levelData = [
     { num: 1, title: "Tin nhan dau tien", difficulty: "De" },
@@ -17,12 +18,42 @@ let completedLevels = 0;
 let timerInterval = null;
 let levelStartTime = 0;
 let hintsRemaining = maxHintsPerLevel;
+let selectedGiftTitles = [];
+let bgMusic = null;
+
+function loadProgress() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+
+        const parsed = JSON.parse(raw);
+        completedLevels = Math.max(0, Math.min(totalLevels, Number(parsed.completedLevels) || 0));
+        selectedGiftTitles = Array.isArray(parsed.selectedGiftTitles)
+            ? parsed.selectedGiftTitles.filter((x) => typeof x === "string")
+            : [];
+    } catch (_) {
+        completedLevels = 0;
+        selectedGiftTitles = [];
+    }
+}
+
+function saveProgress() {
+    const payload = {
+        completedLevels,
+        selectedGiftTitles
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+}
 
 function showScreen(screenId) {
     document.querySelectorAll(".screen").forEach((screen) => {
         screen.classList.remove("active");
     });
     document.getElementById(screenId).classList.add("active");
+
+    if (screenId === "dashboard-screen") {
+        syncGiftSelectionUI();
+    }
 }
 
 function checkPassword() {
@@ -143,6 +174,7 @@ function backToMenu() {
 function completeLevel() {
     stopTimer();
     completedLevels = Math.max(completedLevels, currentLevel);
+    saveProgress();
 
     if (typeof window.triggerConfetti === "function") {
         window.triggerConfetti(140);
@@ -168,19 +200,93 @@ function showFinalDashboard() {
     }
 }
 
+function syncGiftSelectionUI() {
+    document.querySelectorAll(".gift-card").forEach((card) => {
+        const title = card.querySelector("h3")?.textContent?.trim() || "";
+        card.classList.toggle("selected", selectedGiftTitles.includes(title));
+    });
+}
+
 function selectGift(cardElement) {
-    cardElement.classList.toggle("selected");
+    const title = cardElement.querySelector("h3")?.textContent?.trim();
+    if (!title) return;
+
+    if (selectedGiftTitles.includes(title)) {
+        selectedGiftTitles = selectedGiftTitles.filter((x) => x !== title);
+    } else {
+        selectedGiftTitles.push(title);
+    }
+
+    saveProgress();
+    syncGiftSelectionUI();
+}
+
+function buildGiftMessage() {
+    if (!selectedGiftTitles.length) return "";
+    return `Em chon cac mon qua nay:\n- ${selectedGiftTitles.join("\n- ")}`;
+}
+
+function shareGifts(platform) {
+    if (!selectedGiftTitles.length) {
+        alert("Hay chon it nhat 1 mon qua truoc nhe.");
+        return;
+    }
+
+    const text = encodeURIComponent(buildGiftMessage());
+    if (platform === "telegram") {
+        window.open(`https://t.me/share/url?url=&text=${text}`, "_blank", "noopener,noreferrer");
+        return;
+    }
+
+    if (platform === "zalo") {
+        window.open(`https://zalo.me/share?text=${text}`, "_blank", "noopener,noreferrer");
+    }
+}
+
+function initMusicControl() {
+    const musicBtn = document.getElementById("music-btn");
+    if (!musicBtn) return;
+
+    bgMusic = new Audio("assets/audio/bg-music.mp3");
+    bgMusic.loop = true;
+    bgMusic.volume = 0.45;
+
+    let isOn = false;
+
+    musicBtn.addEventListener("click", async () => {
+        if (!bgMusic) return;
+
+        if (!isOn) {
+            try {
+                await bgMusic.play();
+                isOn = true;
+                musicBtn.textContent = "Nhac nen: ON";
+            } catch (_) {
+                alert("Chua mo duoc nhac. Hay kiem tra file assets/audio/bg-music.mp3");
+            }
+            return;
+        }
+
+        bgMusic.pause();
+        isOn = false;
+        musicBtn.textContent = "Nhac nen: OFF";
+    });
 }
 
 function restartGame() {
     completedLevels = 0;
     currentLevel = 1;
     hintsRemaining = maxHintsPerLevel;
+    selectedGiftTitles = [];
+    saveProgress();
     showScreen("main-screen");
     createLevelCards();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    loadProgress();
+    initMusicControl();
+
     const pwInput = document.getElementById("password-input");
     pwInput.addEventListener("keydown", (event) => {
         if (event.key === "Enter") checkPassword();
@@ -194,6 +300,7 @@ window.backToMenu = backToMenu;
 window.giveHint = giveHint;
 window.selectGift = selectGift;
 window.restartGame = restartGame;
+window.shareGifts = shareGifts;
 
 window.addEventListener("resize", () => {
     if (document.getElementById("puzzle-screen").classList.contains("active")) {

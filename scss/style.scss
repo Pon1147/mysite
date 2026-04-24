@@ -13,27 +13,29 @@
 
 .lock-box {
   text-align: center;
-  margin-top: 15vh;
+  margin-top: 10vh;
 
   h1 {
-    font-size: 4.5rem;
-    margin-bottom: 1rem;
+    font-size: clamp(2.4rem, 14vw, 4.5rem);
+    margin-bottom: 0.75rem;
+    line-height: 1.05;
   }
 
   h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 500;
     color: $dark-pink;
+    line-height: 1.35;
   }
 
   input {
-    padding: 16px 24px;
-    font-size: 1.25rem;
+    padding: 14px 18px;
+    font-size: 1.1rem;
     border: 3px solid $primary;
     border-radius: $radius;
-    width: 320px;
+    width: min(320px, 92vw);
     text-align: center;
-    margin: 20px 0;
+    margin: 16px 0;
     outline: none;
     transition: all 0.3s;
 
@@ -47,8 +49,10 @@
     background: $primary;
     color: $white;
     border: none;
-    padding: 16px 48px;
-    font-size: 1.2rem;
+    width: min(320px, 92vw);
+    min-height: 44px;
+    padding: 12px 22px;
+    font-size: 1.05rem;
     border-radius: $radius;
     cursor: pointer;
     transition: all 0.3s;
@@ -62,14 +66,29 @@
   }
 
   .hint {
-    margin-top: 14px;
-    font-size: 0.95rem;
+    margin-top: 12px;
+    font-size: 0.9rem;
     opacity: 0.8;
   }
 }
 
-@media (max-width: 768px) {
-  .lock-box input {
-    width: min(320px, 90vw);
+@media (min-width: 768px) {
+  .lock-box {
+    margin-top: 14vh;
+
+    h2 {
+      font-size: 1.1rem;
+    }
+
+    input {
+      padding: 16px 24px;
+      font-size: 1.25rem;
+    }
+
+    button {
+      width: auto;
+      padding: 16px 48px;
+      font-size: 1.2rem;
+    }
   }
 }

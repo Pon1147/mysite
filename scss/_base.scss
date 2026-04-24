@@ -12,10 +12,25 @@ body {
   color: $dark-pink;
   min-height: 100vh;
   line-height: 1.6;
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+body.dragging-piece {
+  overflow: hidden;
+  touch-action: none;
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 12px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 20px;
+  }
 }
