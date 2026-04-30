@@ -1,7 +1,7 @@
 // ==================== MAIN.JS - Ghép Nối Tình Yêu ====================
 
 const totalLevels = 6;
-const maxHintsPerLevel = 3;
+const maxHintsPerLevel = 5;
 const correctPassword = "1903"; // TODO: replace with your real password
 const STORAGE_KEY = "lovePuzzleProgressV1";
 const COMPLETE_HOLD_MS = 5000;
