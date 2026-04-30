@@ -1,4 +1,4 @@
-// ==================== PUZZLE.JS - Split Board + Piece Bank ====================
+// ==================== PUZZLE.JS - Ghép Nối Tình Yêu ====================
 
 let cols = 4;
 let rows = 4;

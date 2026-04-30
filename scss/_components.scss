@@ -1,3 +1,80 @@
+.dashboard {
+    background: linear-gradient(135deg, #fff0f6 60%, #ffe6f2 100%);
+    border-radius: 32px;
+    box-shadow: 0 8px 32px rgba(255, 77, 148, 0.13), 0 2px 8px rgba(192, 38, 211, 0.08);
+    padding: 48px 24px 36px 24px;
+    max-width: 540px;
+    margin: 40px auto 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.congrats {
+    margin-bottom: 32px;
+}
+
+.congrats-icon {
+    font-size: 3.5rem;
+    margin-bottom: 12px;
+    animation: birthday-pop 1.2s cubic-bezier(0.7,0,0.3,1) infinite alternate;
+}
+
+.congrats h1 {
+    font-family: $font-romantic;
+    font-size: clamp(2.1rem, 7vw, 2.8rem);
+    background: linear-gradient(90deg, $primary, $secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.congrats-message {
+    font-size: 1.13rem;
+    color: $dark-pink;
+    line-height: 1.7;
+    margin-bottom: 0;
+    background: rgba(255,255,255,0.7);
+    border-radius: 18px;
+    padding: 18px 12px 12px 12px;
+    box-shadow: 0 2px 12px rgba(255,77,148,0.07);
+}
+
+.love {
+    color: $primary;
+    font-weight: 600;
+    font-size: 1.18em;
+    font-family: $font-romantic;
+}
+
+.dashboard-actions {
+    margin-top: 36px;
+}
+
+.restart-btn {
+    background: linear-gradient(90deg, $primary, $secondary);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    padding: 14px 38px;
+    font-size: 1.13rem;
+    font-family: $font-main;
+    font-weight: 600;
+    box-shadow: 0 4px 18px rgba(255,77,148,0.13);
+    cursor: pointer;
+    transition: 0.22s;
+}
+
+.restart-btn:hover {
+    background: $secondary;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+}
+
+@keyframes birthday-pop {
+    0% { transform: scale(1) rotate(-8deg); }
+    100% { transform: scale(1.13) rotate(8deg); }
+}
 // ==================== COMPONENTS.SCSS ====================
 @import 'variables';
 
@@ -62,6 +139,14 @@ header {
     }
 }
 
+
+.levels-grid {
+    // Responsive grid columns for desktop
+    @media (min-width: 700px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .level-card {
     background: white;
     border-radius: 18px;
@@ -70,6 +155,11 @@ header {
     box-shadow: $shadow;
     transition: 0.28s ease;
     border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 270px;
+    height: 100%;
 
     &:hover {
         transform: translateY(-4px);
@@ -90,11 +180,17 @@ header {
     }
 
     h3 {
-        margin: 8px 0 14px;
-        font-size: clamp(1.25rem, 4.8vw, 1.9rem);
+        margin: 8px 0 10px;
+        font-size: clamp(1.1rem, 4vw, 1.65rem);
         line-height: 1.25;
         color: $dark-pink;
         word-break: break-word;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        text-align: center;
     }
 
     .difficulty {
@@ -105,6 +201,7 @@ header {
         border-radius: 30px;
         font-size: 0.9rem;
         margin-bottom: 16px;
+        min-height: 28px;
     }
 
     button {
@@ -118,6 +215,7 @@ header {
         cursor: pointer;
         width: 100%;
         transition: 0.22s;
+        margin-top: auto;
 
         &:hover {
             background: $secondary;

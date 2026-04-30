@@ -1,6 +1,6 @@
-// ==================== MAIN.JS - Ghep Noi Tinh Yeu ====================
+// ==================== MAIN.JS - Ghép Nối Tình Yêu ====================
 
-const totalLevels = 5;
+const totalLevels = 6;
 const maxHintsPerLevel = 3;
 const correctPassword = "1903"; // TODO: replace with your real password
 const STORAGE_KEY = "lovePuzzleProgressV1";
@@ -8,11 +8,12 @@ const COMPLETE_HOLD_MS = 5000;
 const ZALO_PHONE = "0903082908";
 
 const levelData = [
-    { num: 1, title: "Tin nhan dau tien", difficulty: "De" },
-    { num: 2, title: "First date cung nhau", difficulty: "De" },
-    { num: 3, title: "Tam hinh chung dau tien", difficulty: "Trung binh" },
-    { num: 4, title: "Em trong mat anh", difficulty: "Trung binh" },
-    { num: 5, title: "Em la dieu tuyet voi nhat anh co", difficulty: "Kho" }
+    { num: 1, title: "Tin nhắn đầu tiên", difficulty: "Dễ" },
+    { num: 2, title: "First date cùng nhau", difficulty: "Dễ" },
+    { num: 3, title: "Tâm hình chung đầu tiên", difficulty: "Trung bình" },
+    { num: 4, title: "Em trong mắt anh", difficulty: "Trung bình" },
+    { num: 5, title: "Lần đầu đi du lịch cùng nhau", difficulty: "Khó" },
+    { num: 6, title: "Em là điều tuyệt vời nhất anh có", difficulty: "Khó" },
 ];
 
 let currentLevel = 1;
@@ -71,10 +72,10 @@ function checkPassword() {
 
     input.style.borderColor = "#ff3b30";
     input.value = "";
-    input.placeholder = "Sai mat khau, thu lai nhe";
+    input.placeholder = "Sai mật khẩu, thử lại nhé";
     setTimeout(() => {
         input.style.borderColor = "#ff4d94";
-        input.placeholder = "ddmm (ngay quen nhau)";
+        input.placeholder = "ddmm (ngày quen nhau)";
     }, 1800);
 }
 
@@ -84,7 +85,7 @@ function createLevelCards() {
 
     grid.innerHTML = `
         <div class="progress-wrap">
-            <div class="progress-label">Tien do: ${completedLevels}/${totalLevels} level</div>
+            <div class="progress-label">Tiến độ: ${completedLevels}/${totalLevels} level</div>
             <div class="progress-bar"><div class="progress" style="width:${(completedLevels / totalLevels) * 100}%"></div></div>
         </div>
     `;
@@ -101,7 +102,7 @@ function createLevelCards() {
             <h3>${level.title}</h3>
             <span class="difficulty">${level.difficulty}</span>
             <button onclick="startLevel(${level.num})" ${isLocked ? "disabled" : ""}>
-                ${isDone ? "Choi lai" : (isLocked ? "Da khoa" : "Bat dau ghep")}
+                ${isDone ? "Chơi lại" : (isLocked ? "Đã khóa" : "Bắt đầu ghép")}
             </button>
         `;
 
@@ -112,7 +113,7 @@ function createLevelCards() {
 function updateHintButton() {
     const hintBtn = document.querySelector(".hint-btn");
     if (!hintBtn) return;
-    hintBtn.textContent = `Hint (${hintsRemaining})`;
+    hintBtn.textContent = `Gợi ý (${hintsRemaining})`;
     hintBtn.disabled = hintsRemaining <= 0;
 }
 
@@ -188,7 +189,7 @@ function completeLevel() {
             return;
         }
 
-        alert(`Hoan thanh Level ${currentLevel}!`);
+        alert(`Hoàn thành Level ${currentLevel}!`);
         showScreen("main-screen");
         createLevelCards();
     }, COMPLETE_HOLD_MS);
@@ -225,12 +226,12 @@ function selectGift(cardElement) {
 
 function buildGiftMessage() {
     if (!selectedGiftTitles.length) return "";
-    return `Em chon cac mon qua nay:\n- ${selectedGiftTitles.join("\n- ")}`;
+    return `Em chọn các món quà này:\n- ${selectedGiftTitles.join("\n- ")}`;
 }
 
 function shareGifts(platform) {
     if (!selectedGiftTitles.length) {
-        alert("Hay chon it nhat 1 mon qua truoc nhe.");
+        alert("Hãy chọn ít nhất 1 món quà trước nhé.");
         return;
     }
 
@@ -240,7 +241,7 @@ function shareGifts(platform) {
             navigator.clipboard.writeText(text).catch(() => {});
         }
         window.open(`https://zalo.me/${ZALO_PHONE}`, "_blank", "noopener,noreferrer");
-        alert("Da mo Zalo 0903082908 va copy noi dung mon qua. Ban chi can paste de gui.");
+        alert("Đã mở Zalo 0903082908 và copy nội dung món quà. Bạn chỉ cần paste để gửi.");
     }
 }
 
@@ -261,16 +262,16 @@ function initMusicControl() {
             try {
                 await bgMusic.play();
                 isOn = true;
-                musicBtn.textContent = "Nhac nen: ON";
+                musicBtn.textContent = "Nhạc nền: ON";
             } catch (_) {
-                alert("Chua mo duoc nhac. Hay kiem tra file assets/audio/bg-music.mp3");
+                alert("Chưa mở được nhạc. Hãy kiểm tra file assets/audio/bg-music.mp3");
             }
             return;
         }
 
         bgMusic.pause();
         isOn = false;
-        musicBtn.textContent = "Nhac nen: OFF";
+        musicBtn.textContent = "Nhạc nền: OFF";
     });
 }
 
